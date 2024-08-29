@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "^5.19.0",
     "desafio-shopper-back": "file:",
+    "express": "^4.19.2",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
