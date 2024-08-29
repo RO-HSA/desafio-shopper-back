@@ -5,7 +5,7 @@ export function createImageParts(image: string) {
 
   const imageParts: Part = {
     inlineData: {
-      data: image.split(',')[1],
+      data: image.split(',')[1] || image,
       mimeType: mimeType || 'image/jpeg',
     },
   };
