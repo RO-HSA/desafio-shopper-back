@@ -2,8 +2,6 @@ import {
   Controller,
   Post,
   Body,
-  Get,
-  Delete,
   ValidationPipe,
   BadRequestException,
 } from '@nestjs/common';
@@ -32,14 +30,5 @@ export class UploadController {
     createUploadDto: CreateUploadDto,
   ) {
     return this.uploadService.create(createUploadDto);
-  }
-  @Get()
-  findAll() {
-    return this.uploadService.findAll();
-  }
-
-  @Delete()
-  deleteAll() {
-    return this.uploadService.deleteAll();
   }
 }

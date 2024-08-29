@@ -1,8 +1,10 @@
+import crypto from 'crypto';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUploadDto } from './dto/create-upload.dto';
 import { GeminiService } from '../gemini/gemini.service';
 import { PrismaService } from 'src/prisma.service';
 import { buildErrorMessage } from 'src/utils';
+import { UploadResponse } from './interface/response.interface';
 
 @Injectable()
 export class UploadService {
@@ -44,29 +46,28 @@ export class UploadService {
 
     const measureValue = await this.geminiService.generateTextFromImage(image);
 
-    const upload = await this.prisma.customer.create({
+    const uuid = crypto.randomUUID();
+
+    await this.prisma.customer.create({
       data: {
         customer_code,
         measures: {
           create: {
+            measure_uuid: uuid,
             measure_type: measure_type.toLowerCase(),
             measure_value: measureValue,
-            measure_datetime: new Date(),
+            measure_datetime: new Date(measure_datetime),
             image_url: 'https://localhost',
           },
         },
       },
     });
-    return upload;
-  }
 
-  async findAll() {
-    return this.prisma.customer.findMany({ include: { measures: true } });
-  }
-
-  async deleteAll() {
-    await this.prisma.measure.deleteMany();
-
-    return;
+    const response: UploadResponse = {
+      image_url: 'https://localhost',
+      measure_value: measureValue,
+      measure_uuid: uuid,
+    };
+    return response;
   }
 }
