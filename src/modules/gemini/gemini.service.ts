@@ -17,7 +17,7 @@ export class GeminiService {
   async generateTextFromImage(base64File: string): Promise<number> {
     try {
       const prompt =
-        'Tell me the measured comsumption of the current period, output only the value as a integer using decimal point';
+        'Analyze the image and tell me the current measurement, output only the value as a integer using decimal point';
       const imageParts = createImageParts(base64File);
 
       const result = await this.visionModel.generateContent([
