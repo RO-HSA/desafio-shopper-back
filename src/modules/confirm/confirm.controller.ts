@@ -14,7 +14,7 @@ export class ConfirmController {
   constructor(private readonly confirmService: ConfirmService) {}
 
   @Patch()
-  create(
+  patch(
     @Body(
       new ValidationPipe({
         exceptionFactory: () => {
