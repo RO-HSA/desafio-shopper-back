@@ -31,7 +31,10 @@ export class ConfirmService {
 
     await this.prisma.measure.update({
       where: { measure_uuid },
-      data: { has_confirmed: true, measure_value: confirmed_value },
+      data: {
+        has_confirmed: true,
+        measure_value: confirmed_value || measure.measure_value,
+      },
     });
 
     return { success: true };
