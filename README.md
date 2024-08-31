@@ -1,40 +1,61 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<a name="top"></a>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1 align="cemter">Shopper Backend Challenge</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![image](https://github.com/user-attachments/assets/256f5bc1-f6c2-469b-bf9c-a52fb8c89a4f)
 
-## Description
+> 🔎 A technical test for the company Shopper.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## :page_facing_up: Explanation
 
-## Project setup
+The project is a challenge proposed by Shopper.
+
+The project consists of a service that manages individualized reading of water and gas consumption. The service use the Gemini API to extract the water or gas comnsumption value.
+
+## 🚀 Technologies
+
+- [Nest.js](https://nestjs.com)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [PostgreSQL](https://www.postgresql.org)
+- [Prisma](https://www.prisma.io/)
+
+## :closed_book: How to use it?
+
+Before starting, you need to have [Git](https://git-scm.com), [Node](https://nodejs.org/en/), [pnpm](https://pnpm.io/installation) installed.
+
+### With Docker
+
+You must have [Docker](https://www.docker.com) installed.
 
 ```bash
-$ pnpm install
+# Clone this project
+$ git clone https://github.com/RO-HSA/desafio-shopper-back
+
+# access
+$ cd desafio-shopper-back
+
+# build the docker image and run the container
+$ docker-compose up --build
+
+# The server will initialize in the <http://localhost:3000>
 ```
 
-## Compile and run the project
+### Without Docker
+
+In case you don't want to install Docker and just run it directly.
 
 ```bash
+# Clone this project
+$ git clone https://github.com/RO-HSA/desafio-shopper-back
+
+# access
+$ cd desafio-shopper-back
+
+# install dependencies
+$ pnpm install
+
+# compile and run the project
+
 # development
 $ pnpm run start
 
@@ -43,43 +64,101 @@ $ pnpm run start:dev
 
 # production mode
 $ pnpm run start:prod
+
+# The server will initialize in the <http://localhost:3000>
 ```
 
-## Run tests
+## Endpoints
 
-```bash
-# unit tests
-$ pnpm run test
+### POST /upload
 
-# e2e tests
-$ pnpm run test:e2e
+- Request (application/json)
 
-# test coverage
-$ pnpm run test:cov
+```
+{
+ "image": base64,
+ "customer_code": string,
+ "measure_datetime": datetime,
+ "measure_type": "WATER" or "GAS"
+}
 ```
 
-## Resources
+- Response 200 (application/json)
 
-Check out a few resources that may come in handy when working with NestJS:
+```
+{
+ “image_url”: string,
+ “measure_value”: integer,
+ “measure_uuid”: string
+}
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### PATCH /confirm
 
-## Support
+- Request (application/json)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+{
+ "measure_uuid": string,
+ "confirmed_value": integer
+}
+```
 
-## Stay in touch
+- Response 200 (application/json)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+{
+ “success”: true
+}
+```
 
-## License
+### GET /{customer_code}/list?measure_type
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- Response 200 (application/json)
+
+```
+{
+ “customer_code”: string,
+ “measures”: [
+   {
+   “measure_uuid”: string,
+   “measure_datetime”: datetime,
+   “measure_type”: string,
+   “has_confirmed”: boolean,
+   “image_url”: string
+   },
+   {
+   “measure_uuid”: string,
+   “measure_datetime”: datetime,
+   “measure_type”: string,
+   “has_confirmed”: boolean,
+   “image_url”: string
+   }
+ ]
+}
+```
+
+## 🤝 Collaborators
+
+Thanks to the following people who contributed to this project:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/user-attachments/assets/08761904-4fae-4b12-9a57-9a67c9248ba5" width="160px;"/><br>
+        <sub>
+          <b>Robert Santos</b>
+        </sub>
+      </a>
+    </all>
+  </tr>
+</table>
+
+## 📝 License
+
+This project is under license. See the [LICENSE](LICENSE.md) file for more details.
+
+&#xa0;
+
+<a href="#top">Go back to top</a>
