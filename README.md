@@ -23,6 +23,20 @@ The project consists of a service that manages individualized reading of water a
 
 Before starting, you need to have [Git](https://git-scm.com), [Node](https://nodejs.org/en/), [pnpm](https://pnpm.io/installation) installed.
 
+You'll also need to grab a [Gemini API Key](https://ai.google.dev/gemini-api/docs/api-key).
+
+Create a .env file on the project's root and put your Gemini api key there.
+
+```
+GEMINI_API_KEY=<your_key>
+```
+
+If you won't use Docker, you also must have [PostgreSQL](https://www.postgresql.org) installed and put your postgresql url in the .env file.
+
+```
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
+```
+
 ### With Docker
 
 You must have [Docker](https://www.docker.com) installed.
