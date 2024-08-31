@@ -7,6 +7,6 @@ export class CreateUploadDto {
   customer_code: string;
   @IsString()
   measure_datetime: string;
-  @IsEnum(['water', 'gas'])
-  measure_type: 'water' | 'water';
+  @IsEnum(['WATER', 'GAS'])
+  measure_type: 'WATER' | 'GAS';
 }
