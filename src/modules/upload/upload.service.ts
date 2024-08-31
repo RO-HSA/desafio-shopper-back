@@ -57,6 +57,8 @@ export class UploadService {
     const objectUrl = URL.createObjectURL(blob);
 
     if (customerExists) {
+      await this.prisma.customer.create({data: {customer_code}})
+
       await this.prisma.measure.create({
         data: {
           customer_code,
