@@ -1,3 +1,35 @@
+import { Blob } from 'buffer';
+
 export const buildErrorMessage = (code: string, description: string) => {
   return { error_code: code, error_description: description };
+};
+
+// export const base64ImageToBlob = (image: string) => {
+//   const mimeType = 'image/jpeg';
+//   const byteString = atob(image);
+
+//   const arrayBuffer = new ArrayBuffer(byteString.length);
+//   const ui8Array = new Uint8Array(arrayBuffer);
+
+//   for (let i = 0; i < byteString.length; i++) {
+//     ui8Array[i] = byteString.charCodeAt(i);
+//   }
+
+//   const blob = new Blob([ui8Array], { type: mimeType });
+
+//   return blob;
+// };
+
+export const base64ImageToBlob = (image: string): Blob => {
+  const byteString = atob(image);
+  const mimeType = 'image/jpeg';
+
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  return new Blob([ab], { type: mimeType });
 };
