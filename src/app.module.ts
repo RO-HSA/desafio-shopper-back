@@ -5,9 +5,16 @@ import { AppService } from './app.service';
 import { UploadModule } from './modules/upload/upload.module';
 import { GeminiModule } from './modules/gemini/gemini.module';
 import { ConfirmModule } from './modules/confirm/confirm.module';
+import { CustomerModule } from './modules/customer/customer.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UploadModule, GeminiModule, ConfirmModule],
+  imports: [
+    ConfigModule.forRoot(),
+    UploadModule,
+    GeminiModule,
+    ConfirmModule,
+    CustomerModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
