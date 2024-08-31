@@ -22,7 +22,10 @@ export class CustomerService {
     }
 
     if (measureType) {
-      if (measureType.toLowerCase() !== 'water') {
+      if (
+        measureType.toLowerCase() !== 'water' &&
+        measureType.toLowerCase() !== 'gas'
+      ) {
         throw new BadRequestException(
           buildErrorMessage('INVALID_TYPE', 'Tipo de medição não permitida'),
         );
